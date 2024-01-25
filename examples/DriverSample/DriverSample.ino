@@ -1,12 +1,12 @@
 /**
  * @file DriverSample.ino
  * @author SeanKwok (shaoxiang@m5stack.com)
- * @brief  Atomic Motion Test
+ * @brief Atomic Motion Test
  * @version 0.1
  * @date 2024-01-24
  *
  *
- * @Hardwares: M5Atom/M5AtomS3 + Atomic Motion
+ * @Hardwares: M5AtomS3 + Atomic Motion
  * @Platform Version: Arduino M5Stack Board Manager v2.0.9
  * @Dependent Library:
  * M5GFX: https://github.com/m5stack/M5GFX
@@ -29,14 +29,28 @@ void setup() {
     M5.Display.setTextSize(2);
     M5.Display.drawString("Atomic Init", M5.Display.width() / 2,
                           M5.Display.height() / 2);
-    while (
-        !AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, 38, 39, 100000)) {
+
+    m5::board_t board = M5.getBoard();
+
+    uint8_t sda, scl;
+
+    if (board == m5::board_t::board_M5AtomS3) {
+        sda = 38;
+        scl = 39;
+    } else {
+        sda = 25;
+        scl = 21;
+    }
+
+    while (!AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, sda, scl,
+                               100000)) {
         M5.Display.clear();
         M5.Display.drawString("Init Fail", M5.Display.width() / 2,
                               M5.Display.height() / 2);
         Serial.println("Atomic Motion begin failed");
         delay(1000);
     }
+
     M5.Display.clear();
     M5.Display.drawString("Motion", M5.Display.width() / 2,
                           M5.Display.height() / 2);

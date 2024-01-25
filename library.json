@@ -1,7 +1,7 @@
 {
   "name": "M5Atomic-Motion",
-  "description": "Library for M5Stack M5Atomic-Motion development kit",
-  "keywords": "W5500",
+  "description": "Library for M5Stack M5Atomic-Motion",
+  "keywords": "M5Stack Atomic Motion",
   "authors": {
     "name": "M5Stack",
     "url": "http://www.m5stack.com"
