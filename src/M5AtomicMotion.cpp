@@ -49,7 +49,6 @@ uint16_t M5AtomicMotion::getServoPulse(uint8_t servo_ch) {
 }
 
 int8_t M5AtomicMotion::getMotorSpeed(uint8_t motor_ch) {
-    int8_t data = 0;
     if (motor_ch > 1) return 1;
     uint8_t reg = motor_ch | 0x20;
     return (int8_t)_i2c.readByte(_addr, reg);
