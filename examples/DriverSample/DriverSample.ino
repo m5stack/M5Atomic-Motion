@@ -32,7 +32,7 @@ void setup()
 
     m5::board_t board = M5.getBoard();
 
-    uint8_t sda, scl;
+    uint8_t sda = 0, scl = 0;
 
     if (board == m5::board_t::board_M5AtomLite || board == m5::board_t::board_M5AtomMatrix ||
         board == m5::board_t::board_M5AtomEcho) {
