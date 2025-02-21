@@ -4,7 +4,17 @@ bool M5AtomicMotion::begin(TwoWire *_wire, uint8_t addr, uint8_t sda,
                            uint8_t scl, long freq) {
     _i2c.begin(_wire, sda, scl, freq);
     _addr = addr;
-    return _i2c.exist(_addr);
+    if (!_i2c.exist(_addr)) {
+        return false;
+    }
+    if (!ina226.begin(&_i2c)) {
+        printf("Ina226 init failed\n");
+        return false;
+    }
+    ina226.configure(INA226_AVERAGES_16, INA226_BUS_CONV_TIME_1100US,
+                     INA226_SHUNT_CONV_TIME_1100US, INA226_MODE_SHUNT_BUS_CONT);
+    ina226.calibrate(0.02, 8.192);
+    return true;
 }
 
 uint8_t M5AtomicMotion::setServoAngle(uint8_t servo_ch, uint8_t angle) {
