@@ -5,13 +5,7 @@
 #include "Wire.h"
 
 class I2C_Class {
-   private:
-    TwoWire* _wire;
-    uint8_t _scl;
-    uint8_t _sda;
-    long _freq;
-
-   public:
+public:
     void begin(TwoWire* wire, uint8_t sda, uint8_t scl, long freq = 100000);
     bool exist(uint8_t addr);
     bool writeBytes(uint8_t addr, uint8_t reg, uint8_t* buffer, uint8_t length);
@@ -20,6 +14,12 @@ class I2C_Class {
     uint8_t readByte(uint8_t addr, uint8_t reg);
     bool writeBitOn(uint8_t addr, uint8_t reg, uint8_t data);
     bool writeBitOff(uint8_t addr, uint8_t reg, uint8_t data);
+
+private:
+    TwoWire* _wire;
+    uint8_t _scl;
+    uint8_t _sda;
+    long _freq;
 };
 
 #endif

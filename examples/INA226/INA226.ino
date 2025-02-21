@@ -9,29 +9,26 @@
 
 M5AtomicMotion AtomicMotion;
 
-void setup() {
+void setup()
+{
     auto cfg = M5.config();
     M5.begin(cfg);
 
     m5::board_t board = M5.getBoard();
     uint8_t sda, scl = 0;
 
-    if (board == m5::board_t::board_M5AtomLite ||
-        board == m5::board_t::board_M5AtomMatrix ||
+    if (board == m5::board_t::board_M5AtomLite || board == m5::board_t::board_M5AtomMatrix ||
         board == m5::board_t::board_M5AtomEcho) {
         sda = 25;
         scl = 21;
-    } else if (board == m5::board_t::board_M5AtomS3 ||
-               board == m5::board_t::board_M5AtomS3R ||
-               board == m5::board_t::board_M5AtomS3Lite ||
-               board == m5::board_t::board_M5AtomS3RExt ||
+    } else if (board == m5::board_t::board_M5AtomS3 || board == m5::board_t::board_M5AtomS3R ||
+               board == m5::board_t::board_M5AtomS3Lite || board == m5::board_t::board_M5AtomS3RExt ||
                board == m5::board_t::board_M5AtomS3RCam) {
         sda = 38;
         scl = 39;
     }
 
-    while (!AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, sda, scl,
-                               100000)) {
+    while (!AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, sda, scl, 100000)) {
         printf("Atomic Motion begin failed\n");
         delay(1000);
     }
@@ -39,7 +36,8 @@ void setup() {
     printf("Atomic Motion INA226 Test\n");
 }
 
-void loop() {
+void loop()
+{
     float voltage = AtomicMotion.ina226.readBusVoltage();
     float current = AtomicMotion.ina226.readShuntCurrent();
 

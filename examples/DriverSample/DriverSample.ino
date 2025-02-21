@@ -20,15 +20,15 @@
 
 M5AtomicMotion AtomicMotion;
 
-void setup() {
+void setup()
+{
     auto cfg = M5.config();
     M5.begin(cfg);
 
     M5.Display.setTextColor(GREEN);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(2);
-    M5.Display.drawString("Atomic Init", M5.Display.width() / 2,
-                          M5.Display.height() / 2);
+    M5.Display.drawString("Atomic Init", M5.Display.width() / 2, M5.Display.height() / 2);
 
     m5::board_t board = M5.getBoard();
 
@@ -42,51 +42,44 @@ void setup() {
         scl = 21;
     }
 
-    while (!AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, sda, scl,
-                               100000)) {
+    while (!AtomicMotion.begin(&Wire, M5_ATOMIC_MOTION_I2C_ADDR, sda, scl, 100000)) {
         M5.Display.clear();
-        M5.Display.drawString("Init Fail", M5.Display.width() / 2,
-                              M5.Display.height() / 2);
+        M5.Display.drawString("Init Fail", M5.Display.width() / 2, M5.Display.height() / 2);
         Serial.println("Atomic Motion begin failed");
         delay(1000);
     }
 
     M5.Display.clear();
-    M5.Display.drawString("Motion", M5.Display.width() / 2,
-                          M5.Display.height() / 2);
+    M5.Display.drawString("Motion", M5.Display.width() / 2, M5.Display.height() / 2);
 
     Serial.println("Atomic Motion Test");
 }
 
-void loop() {
+void loop()
+{
     for (int ch = 0; ch < 2; ch++) {
         AtomicMotion.setMotorSpeed(ch, 127);
-        Serial.printf("Motor Channel %d: %d \n", ch,
-                      AtomicMotion.getMotorSpeed(ch));
+        Serial.printf("Motor Channel %d: %d \n", ch, AtomicMotion.getMotorSpeed(ch));
     }
     delay(1000);
     for (int ch = 0; ch < 2; ch++) {
         AtomicMotion.setMotorSpeed(ch, -127);
-        Serial.printf("Motor Channel %d: %d \n", ch,
-                      AtomicMotion.getMotorSpeed(ch));
+        Serial.printf("Motor Channel %d: %d \n", ch, AtomicMotion.getMotorSpeed(ch));
     }
     delay(1000);
     for (int ch = 0; ch < 2; ch++) {
         AtomicMotion.setMotorSpeed(ch, 0);
-        Serial.printf("Motor Channel %d: %d \n", ch,
-                      AtomicMotion.getMotorSpeed(ch));
+        Serial.printf("Motor Channel %d: %d \n", ch, AtomicMotion.getMotorSpeed(ch));
     }
     delay(1000);
     for (int ch = 0; ch < 4; ch++) {
         AtomicMotion.setServoAngle(ch, 180);
-        Serial.printf("Servo Channel %d: %d \n", ch,
-                      AtomicMotion.getServoAngle(ch));
+        Serial.printf("Servo Channel %d: %d \n", ch, AtomicMotion.getServoAngle(ch));
     }
     delay(1000);
     for (int ch = 0; ch < 4; ch++) {
         AtomicMotion.setServoAngle(ch, 0);
-        Serial.printf("Servo Channel %d: %d \n", ch,
-                      AtomicMotion.getServoAngle(ch));
+        Serial.printf("Servo Channel %d: %d \n", ch, AtomicMotion.getServoAngle(ch));
     }
     delay(1000);
 }

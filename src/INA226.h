@@ -99,13 +99,12 @@ typedef enum {
 } ina226_mode_t;
 
 class INA226 {
-   public:
+public:
     bool begin(I2C_Class* i2cClass, uint8_t address = INA226_ADDRESS);
-    bool configure(
-        ina226_averages_t avg                = INA226_AVERAGES_1,
-        ina226_busConvTime_t busConvTime     = INA226_BUS_CONV_TIME_1100US,
-        ina226_shuntConvTime_t shuntConvTime = INA226_SHUNT_CONV_TIME_1100US,
-        ina226_mode_t mode                   = INA226_MODE_SHUNT_BUS_CONT);
+    bool configure(ina226_averages_t avg                = INA226_AVERAGES_1,
+                   ina226_busConvTime_t busConvTime     = INA226_BUS_CONV_TIME_1100US,
+                   ina226_shuntConvTime_t shuntConvTime = INA226_SHUNT_CONV_TIME_1100US,
+                   ina226_mode_t mode                   = INA226_MODE_SHUNT_BUS_CONT);
     bool calibrate(float rShuntValue = 0.1, float iMaxExcepted = 2);
 
     ina226_averages_t getAverages(void);
@@ -145,7 +144,7 @@ class INA226 {
 
     uint16_t getMaskEnable(void);
 
-   private:
+private:
     I2C_Class* i2cClass = nullptr;
     int8_t inaAddress;
     float currentLSB, powerLSB;
