@@ -23,19 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-
-// #if ARDUINO >= 100
-// #include "Arduino.h"
-// #else
-// #include "WProgram.h"
-// #endif
-
-// #include <Wire.h>
-
 #include "INA226.h"
 #include <cstdint>
 #include <driver/i2c.h>
-// #include <cmath>
 #include <math.h>
 
 bool INA226::begin(I2C_Class* i2cClass, uint8_t address)
