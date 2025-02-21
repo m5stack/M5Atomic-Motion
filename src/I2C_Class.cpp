@@ -58,8 +58,8 @@ uint8_t I2C_Class::readByte(uint8_t addr, uint8_t reg)
     _wire->beginTransmission(addr);
     _wire->write(reg);
     _wire->endTransmission();
-
-    if (_wire->requestFrom(addr, 1)) {
+    uint8_t length = 1;
+    if (_wire->requestFrom(addr, length)) {
         return _wire->read();
     }
     return 0;
